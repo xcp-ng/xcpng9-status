@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "title": "XCP-ng 9 upstream status",
+    "version": "1.0.0",
+    "description": "Complete architecture with 0 components, 0 interfaces, and 0 requirements",
+    "total_requirements": 0,
+    "total_components": 0,
+    "total_interfaces": 0,
+    "total_functions": 0
+  },
+  "requirements": [],
+  "components": [],
+  "interfaces": [],
+  "functions": [],
+  "traces": [],
+  "missions": [],
+  "capabilities": [],
+  "functional_chains": [],
+  "state_machines": [],
+  "scenario_details": [],
+  "data_model": {
+    "classes": [],
+    "enumerations": [],
+    "data_types": [],
+    "exchange_items": []
+  },
+  "diagram": {
+    "nodes": [],
+    "edges": [],
+    "layers": []
+  }
+}
