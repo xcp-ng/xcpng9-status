@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""Validate a Capella model with capellambse plus the project rules.
+
+Usage: validate-capella [MODEL_DIR]   (default: current directory)
+
+Prints each failed rule and exits non-zero if any failed.  Run it with the
+interpreter py-capellambse is installed for.
+"""
+
+import os
+import sys
+
+sys.dont_write_bytecode = True  # no __pycache__ in the source tree
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import capellambse  # noqa: E402
+
+import capella_rules  # noqa: E402,F401  (registers the project rules)
+
+model = capellambse.MelodyModel(sys.argv[1] if len(sys.argv) > 1 else os.getcwd())
+failed = model.validate().by_passed(False)
+for result in failed:
+    rule = result.rule
+    print(f"{rule.id} {rule.category.name}: {rule.name}: {result.object._short_repr_()}")
+sys.exit(len(failed) != 0)

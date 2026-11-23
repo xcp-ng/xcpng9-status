@@ -1,0 +1,143 @@
+# Build the design model's HTML site, run the model checks, and publish the
+# site on GitHub Pages (from the gh-pages branch):
+# - pushes to master deploy at the site root;
+# - each pull request deploys a preview under pr-preview/pr-<N>/, linked
+#   from a comment on the PR, and removed when the PR is closed.
+#
+# Pull requests from forks get a read-only token: they still build and
+# check, and the site is kept as the "site" artifact, but no preview is
+# deployed.
+#
+# Supply chain: only GitHub's own actions are used, referenced by commit
+# hash (the version in comment); publishing is done by
+# the scripts in ci/.  Downloaded tools are checked against the SHA-256
+# written below, to be updated with the version.
+
+name: Model
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+  workflow_dispatch:
+
+env:
+  ARCLANG_VERSION: "4.12.0"
+  ARCLANG_SHA256: "701e7fc293a8cf09685fac92c25d5bedd05972da4d193c22ba6ab71868d20ea3"
+  SYSML_VERSION: "0.12.1"
+  SYSML_SHA256: "775260218ada7ebfbe7a6daa2e3ef21637bc1dbc66c530253a30a0f544e61952"
+  PYTHON_VERSION: "3.13"
+  CAPELLAMBSE_VERSION: "0.8.1"
+
+jobs:
+  site:
+    name: Build the site
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - &install-arclang
+        name: Install arclang (release binary, checksum verified)
+        run: |
+          set -euo pipefail
+          base="https://github.com/Mbaroudi/arclang/releases/download/v${ARCLANG_VERSION}"
+          asset="arclang-linux-x86_64.tar.gz"
+          cd "$(mktemp -d)"
+          curl -fsSL --retry 3 -O "$base/$asset"
+          echo "${ARCLANG_SHA256}  ${asset}" | sha256sum -c -
+          tar xzf "$asset"
+          install -D -m 0755 arclang-linux-x86_64 "$HOME/.local/bin/arclang"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - run: make site
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site
+          path: build/site/
+
+  check:
+    name: Check ${{ matrix.check }}
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [arclang, sysml, capella]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - *install-arclang
+      - name: Install sysml (OpenSysML release binary, checksum verified)
+        if: matrix.check == 'sysml'
+        run: |
+          set -euo pipefail
+          base="https://github.com/Open-MBEE/OpenSysML/releases/download/v${SYSML_VERSION}"
+          asset="sysml-linux-amd64.tar.gz"
+          cd "$(mktemp -d)"
+          curl -fsSL --retry 3 -O "$base/$asset"
+          echo "${SYSML_SHA256}  ${asset}" | sha256sum -c -
+          tar xzf "$asset"
+          install -D -m 0755 sysml-linux-amd64 "$HOME/.local/bin/sysml"
+      - name: Install Python
+        if: matrix.check == 'capella'
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install py-capellambse
+        if: matrix.check == 'capella'
+        run: pip install "capellambse==${CAPELLAMBSE_VERSION}"
+      - run: make check-${{ matrix.check }}
+
+  preview:
+    name: Pull-request preview
+    if: >-
+      github.event_name == 'pull_request'
+      && github.event.pull_request.head.repo.full_name == github.repository
+      && !cancelled()
+    needs: site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      pages: read
+    env:
+      PR: ${{ github.event.pull_request.number }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - if: github.event.action != 'closed'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: site
+          path: site/
+      - name: Publish the preview
+        if: github.event.action != 'closed'
+        run: |
+          ci/pages publish site "pr-preview/pr-$PR"
+          # The site's URL as GitHub Pages reports it (custom domain
+          # included).  On failure (Pages not enabled yet), gh prints the
+          # error body on stdout: discard it and use the default URL.
+          if ! base=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .html_url 2>/dev/null); then
+            base="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
+          fi
+          ci/pr-comment "$PR" "Preview of the model for ${{ github.event.pull_request.head.sha }}: ${base%/}/pr-preview/pr-$PR/
+          (GitHub Pages may take a minute to update.)"
+      - name: Remove the preview
+        if: github.event.action == 'closed'
+        run: |
+          ci/pages remove "pr-preview/pr-$PR"
+          ci/pr-comment "$PR" "Preview removed, the pull request being closed."
+
+  deploy:
+    name: Deploy the site
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: site
+          path: site/
+      - run: ci/pages publish site
