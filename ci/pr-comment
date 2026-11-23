@@ -1,0 +1,34 @@
+#!/bin/bash
+# Create, or update, this workflow's single comment on a pull request.
+#
+#   ci/pr-comment PR_NUMBER BODY
+#
+# Why: reviewers need the preview link on the pull request itself.  One
+# comment, updated in place on each push, avoids piling up a comment per
+# push.  It is found again by a hidden marker, among the comments of the
+# workflow's bot only: a reply quoting it must not be taken for it.
+#
+# Done with gh (preinstalled on GitHub's runners) rather than a
+# third-party action, so that what holds the token stays readable here.
+# Traced (set -x) so that the CI log shows exactly what was done with the
+# token.
+#
+# Needs GH_TOKEN and GITHUB_REPOSITORY (set by GitHub Actions).
+set -euxo pipefail
+
+pr=${1:?usage: ci/pr-comment PR_NUMBER BODY}
+body=${2:?missing BODY}
+case "$pr" in *[!0-9]*) echo "invalid PR number: $pr" >&2; exit 2 ;; esac
+
+marker="<!-- xcpng9-status-preview -->"
+id=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$pr/comments" \
+    --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | contains(\"$marker\"))) | .id" | head -n1)
+if [ -n "$id" ]; then
+    gh api --method PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" \
+        -f body="$marker
+$body" >/dev/null
+else
+    gh api --method POST "repos/$GITHUB_REPOSITORY/issues/$pr/comments" \
+        -f body="$marker
+$body" >/dev/null
+fi

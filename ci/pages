@@ -1,0 +1,106 @@
+#!/bin/bash
+# Publish to, or remove from, the gh-pages branch, with git alone.
+#
+#   ci/pages publish SRC_DIR [DEST]   copy SRC_DIR's content to DEST (a
+#                                     directory of the branch; the root when
+#                                     omitted, then keeping pr-preview/)
+#   ci/pages remove DEST              remove DEST
+#
+# Why: this runs with a token that can write to the repository.  Doing it
+# in a short script of our own, readable in the repository, avoids
+# trusting third-party actions (and whatever they pull in) with that
+# token.
+#
+# Why a branch rather than GitHub's Pages artifact deployment: an artifact
+# deployment replaces the whole site, while previews of several pull
+# requests must live side by side with the site of master; each run only
+# changes its own directory of the branch.
+#
+# Run from a clone whose `origin` can be pushed to (as left by
+# actions/checkout).  Traced (set -x) so that the CI log shows exactly
+# what was done with the token.
+set -euxo pipefail
+
+branch=gh-pages
+action=${1:?usage: ci/pages publish SRC_DIR [DEST] | remove DEST}
+
+case "$action" in
+    publish)
+        src=$(realpath "${2:?missing SRC_DIR}")
+        dest=${3:-}
+        ;;
+    remove)
+        dest=${2:?missing DEST}
+        ;;
+    *)
+        echo "unknown action: $action" >&2
+        exit 2
+        ;;
+esac
+# DEST is a plain relative path inside the branch: never let it reach
+# outside the worktree.
+case "/$dest/" in
+    */../* | */./* | //?*) echo "invalid DEST: $dest" >&2; exit 2 ;;
+esac
+
+work=$(mktemp -d)
+trap 'git worktree remove --force "$work" 2>/dev/null || true; rm -rf "$work"' EXIT
+
+change() {
+    case "$action" in
+        publish)
+            if [ -z "$dest" ]; then
+                find "$work" -mindepth 1 -maxdepth 1 ! -name .git ! -name pr-preview -exec rm -rf {} +
+            else
+                rm -rf "${work:?}/$dest"
+            fi
+            mkdir -p "$work/$dest"
+            cp -R "$src/." "$work/$dest/"
+            # GitHub Pages runs Jekyll on a site deployed from a branch,
+            # which would drop files and directories whose name starts
+            # with "_" and slow the deployment; this file turns it off,
+            # the site being plain static files.
+            touch "$work/.nojekyll"
+            ;;
+        remove)
+            rm -rf "${work:?}/$dest"
+            ;;
+    esac
+}
+
+# Several workflow runs may update gh-pages at the same time (pull
+# requests pushed together, a merge to master): the last one to push is
+# refused, gh-pages having moved since it fetched.  It then starts over
+# from the new state; as each run only touches its own directory, this
+# converges.  A workflow-level concurrency group is not used instead, as
+# GitHub keeps only the latest run queued in a group, cancelling the
+# others, which could lose a preview update or removal.
+for attempt in 1 2 3 4 5; do
+    git worktree remove --force "$work" 2>/dev/null || true
+    rm -rf "$work"
+    if git fetch --depth=1 origin "+refs/heads/$branch:refs/remotes/origin/$branch" 2>/dev/null; then
+        git worktree add --force -B "$branch" "$work" "origin/$branch"
+    else
+        git worktree add --force --orphan -B "$branch" "$work"
+    fi
+    change
+    git -C "$work" add --all
+    if git -C "$work" diff --cached --quiet; then
+        echo "gh-pages: nothing to change"
+        exit 0
+    fi
+    # Commit as GitHub's own Actions bot: its noreply address (bot user
+    # id 41898282, as documented by actions/checkout) makes GitHub show
+    # the commit as made by github-actions[bot].
+    git -C "$work" \
+        -c user.name="github-actions[bot]" \
+        -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+        commit --quiet -m "$action ${dest:-/} from ${GITHUB_SHA:-$(git rev-parse HEAD)}"
+    if git -C "$work" push origin "$branch"; then
+        exit 0
+    fi
+    echo "gh-pages: push refused (attempt $attempt), retrying" >&2
+    sleep $((attempt * 2))
+done
+echo "gh-pages: giving up" >&2
+exit 1
