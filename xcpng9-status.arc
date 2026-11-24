@@ -184,3 +184,11 @@ operational_analysis "Following XCP-ng 9 components against upstream" {
     interaction "Status to report" { id: "OA-INTER-STATUS-TO-REPORT" from: "OA-ACTIVITY-ASSESS-LAG" to: "OA-ACTIVITY-REPORT-STATUS" data_type: "Lag across all components" }
     interaction "Update task" { id: "OA-INTER-UPDATE-TASK" from: "OA-ACTIVITY-PRIORITIZE" to: "OA-ACTIVITY-UPDATE-PACKAGE" data_type: "Prioritized update task" }
 }
+trace "OA-COMM-PACKAGED-VERSION" allocates "OA-INTER-UPSTREAM-REFERENCE" {}
+trace "OA-COMM-PACKAGED-VERSION" allocates "OA-INTER-CURRENT-VERSION" {}
+trace "OA-COMM-UPSTREAM-RELEASE" allocates "OA-INTER-NEW-UPSTREAM-RELEASE" {}
+trace "OA-COMM-DISTRO-PACKAGE" allocates "OA-INTER-NEW-DISTRO-PACKAGE" {}
+trace "OA-COMM-PACKAGE-UPDATE" allocates "OA-INTER-UPDATED-PACKAGE" {}
+trace "OA-COMM-COMPONENT-STATUS" allocates "OA-INTER-COMPONENT-LAG" {}
+trace "OA-COMM-COMPONENT-STATUS" allocates "OA-INTER-DIVERGENCE-RATIONALE" {}
+trace "OA-COMM-UPDATE-ASSIGNMENT" allocates "OA-INTER-UPDATE-TASK" {}
