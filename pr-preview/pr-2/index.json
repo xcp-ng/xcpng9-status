@@ -1,0 +1,458 @@
+{
+  "metadata": {
+    "title": "XCP-ng 9 upstream status",
+    "version": "1.0.0",
+    "description": "Complete architecture with 16 components, 0 interfaces, and 0 requirements",
+    "total_requirements": 0,
+    "total_components": 16,
+    "total_interfaces": 0,
+    "total_functions": 0
+  },
+  "requirements": [],
+  "components": [
+    {
+      "id": "OA-MAINT",
+      "name": "Package maintainer",
+      "layer": "Operational",
+      "component_type": "Actor",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-RELMGR",
+      "name": "Release manager",
+      "layer": "Operational",
+      "component_type": "Actor",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-XSRC",
+      "name": "XCP-ng 9 package sources",
+      "layer": "Operational",
+      "component_type": "System",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-UPSTREAM",
+      "name": "Upstream projects",
+      "layer": "Operational",
+      "component_type": "System",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-INTERM",
+      "name": "Intermediate distributions",
+      "layer": "Operational",
+      "component_type": "System",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-IDUP",
+      "name": "Identify the upstream of a component",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-WATCH",
+      "name": "Watch upstream for new versions",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-CMP",
+      "name": "Compare packaged version with upstream",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-UPD",
+      "name": "Decide and perform package update",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-DIVERGE",
+      "name": "Record deliberate divergence",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-ASSESS",
+      "name": "Assess overall upstream lag",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-PRIO",
+      "name": "Prioritize update work",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-REPORT",
+      "name": "Report status",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-HOLD",
+      "name": "Hold packaged component versions",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-PUBREL",
+      "name": "Publish releases",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACT-PUBPKG",
+      "name": "Publish distribution packages",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    }
+  ],
+  "interfaces": [],
+  "functions": [],
+  "traces": [],
+  "missions": [],
+  "capabilities": [
+    {
+      "id": "OC-KNOW",
+      "name": "Know where each component stands relative to upstream",
+      "kind": "Operational",
+      "mission": null,
+      "realizes": null,
+      "involves": [
+        "Package maintainer",
+        "XCP-ng 9 package sources",
+        "Upstream projects",
+        "Intermediate distributions",
+        "Identify the upstream of a component",
+        "Watch upstream for new versions",
+        "Compare packaged version with upstream",
+        "Record deliberate divergence",
+        "Hold packaged component versions"
+      ]
+    },
+    {
+      "id": "OC-STEER",
+      "name": "Steer upstream catch-up work",
+      "kind": "Operational",
+      "mission": null,
+      "realizes": null,
+      "involves": [
+        "Release manager",
+        "Package maintainer",
+        "Assess overall upstream lag",
+        "Prioritize update work",
+        "Decide and perform package update",
+        "Report status"
+      ]
+    }
+  ],
+  "functional_chains": [],
+  "state_machines": [],
+  "scenario_details": [],
+  "data_model": {
+    "classes": [],
+    "enumerations": [],
+    "data_types": [],
+    "exchange_items": []
+  },
+  "diagram": {
+    "nodes": [
+      {
+        "id": "OA-MAINT",
+        "label": "Package maintainer",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-RELMGR",
+        "label": "Release manager",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-XSRC",
+        "label": "XCP-ng 9 package sources",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 228,
+        "height": 180
+      },
+      {
+        "id": "OA-UPSTREAM",
+        "label": "Upstream projects",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-INTERM",
+        "label": "Intermediate distributions",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 242,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-IDUP",
+        "label": "Identify the upstream of a component",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 312,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-WATCH",
+        "label": "Watch upstream for new versions",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 277,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-CMP",
+        "label": "Compare packaged version with upstream",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 326,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-UPD",
+        "label": "Decide and perform package update",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 291,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-DIVERGE",
+        "label": "Record deliberate divergence",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 256,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-ASSESS",
+        "label": "Assess overall upstream lag",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 249,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-PRIO",
+        "label": "Prioritize update work",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-REPORT",
+        "label": "Report status",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-HOLD",
+        "label": "Hold packaged component versions",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 284,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-PUBREL",
+        "label": "Publish releases",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-ACT-PUBPKG",
+        "label": "Publish distribution packages",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 263,
+        "height": 180
+      }
+    ],
+    "edges": [],
+    "layers": [
+      {
+        "name": "Operational",
+        "color": "#EFEBE9",
+        "description": "Architecture Layer"
+      }
+    ]
+  }
+}
