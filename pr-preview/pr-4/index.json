@@ -1,0 +1,458 @@
+{
+  "metadata": {
+    "title": "XCP-ng 9 upstream status",
+    "version": "1.0.0",
+    "description": "Complete architecture with 16 components, 0 interfaces, and 0 requirements",
+    "total_requirements": 0,
+    "total_components": 16,
+    "total_interfaces": 0,
+    "total_functions": 0
+  },
+  "requirements": [],
+  "components": [
+    {
+      "id": "OA-ACTOR-MAINTAINER",
+      "name": "Package maintainer",
+      "layer": "Operational",
+      "component_type": "Actor",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTOR-RELEASE-MANAGER",
+      "name": "Release manager",
+      "layer": "Operational",
+      "component_type": "Actor",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ENTITY-XCPNG-SOURCES",
+      "name": "XCP-ng 9 package sources",
+      "layer": "Operational",
+      "component_type": "System",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ENTITY-UPSTREAM-PROJECTS",
+      "name": "Upstream projects",
+      "layer": "Operational",
+      "component_type": "System",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ENTITY-INTERMEDIATE-DISTROS",
+      "name": "Intermediate distributions",
+      "layer": "Operational",
+      "component_type": "System",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-IDENTIFY-UPSTREAM",
+      "name": "Identify the upstream of a component",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-WATCH-UPSTREAM",
+      "name": "Watch upstream for new versions",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-COMPARE-VERSIONS",
+      "name": "Compare packaged version with upstream",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-UPDATE-PACKAGE",
+      "name": "Decide and perform package update",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-RECORD-DIVERGENCE",
+      "name": "Record deliberate divergence",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-ASSESS-LAG",
+      "name": "Assess overall upstream lag",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-PRIORITIZE",
+      "name": "Prioritize update work",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-REPORT-STATUS",
+      "name": "Report status",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-HOLD-VERSIONS",
+      "name": "Hold packaged component versions",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-PUBLISH-RELEASES",
+      "name": "Publish releases",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    },
+    {
+      "id": "OA-ACTIVITY-PUBLISH-DISTRO-PACKAGES",
+      "name": "Publish distribution packages",
+      "layer": "Operational",
+      "component_type": "OperationalActivity",
+      "safety_level": null,
+      "asil": null,
+      "interfaces_in": [],
+      "interfaces_out": [],
+      "functions": [],
+      "description": "Component in Operational layer"
+    }
+  ],
+  "interfaces": [],
+  "functions": [],
+  "traces": [],
+  "missions": [],
+  "capabilities": [
+    {
+      "id": "OA-CAP-KNOW-STANDING",
+      "name": "Know where each component stands relative to upstream",
+      "kind": "Operational",
+      "mission": null,
+      "realizes": null,
+      "involves": [
+        "Package maintainer",
+        "XCP-ng 9 package sources",
+        "Upstream projects",
+        "Intermediate distributions",
+        "Identify the upstream of a component",
+        "Watch upstream for new versions",
+        "Compare packaged version with upstream",
+        "Record deliberate divergence",
+        "Hold packaged component versions"
+      ]
+    },
+    {
+      "id": "OA-CAP-STEER-CATCHUP",
+      "name": "Steer upstream catch-up work",
+      "kind": "Operational",
+      "mission": null,
+      "realizes": null,
+      "involves": [
+        "Release manager",
+        "Package maintainer",
+        "Assess overall upstream lag",
+        "Prioritize update work",
+        "Decide and perform package update",
+        "Report status"
+      ]
+    }
+  ],
+  "functional_chains": [],
+  "state_machines": [],
+  "scenario_details": [],
+  "data_model": {
+    "classes": [],
+    "enumerations": [],
+    "data_types": [],
+    "exchange_items": []
+  },
+  "diagram": {
+    "nodes": [
+      {
+        "id": "OA-ACTOR-MAINTAINER",
+        "label": "Package maintainer",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTOR-RELEASE-MANAGER",
+        "label": "Release manager",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-ENTITY-XCPNG-SOURCES",
+        "label": "XCP-ng 9 package sources",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 228,
+        "height": 180
+      },
+      {
+        "id": "OA-ENTITY-UPSTREAM-PROJECTS",
+        "label": "Upstream projects",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-ENTITY-INTERMEDIATE-DISTROS",
+        "label": "Intermediate distributions",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 242,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-IDENTIFY-UPSTREAM",
+        "label": "Identify the upstream of a component",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 312,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-WATCH-UPSTREAM",
+        "label": "Watch upstream for new versions",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 277,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-COMPARE-VERSIONS",
+        "label": "Compare packaged version with upstream",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 326,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-UPDATE-PACKAGE",
+        "label": "Decide and perform package update",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 291,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-RECORD-DIVERGENCE",
+        "label": "Record deliberate divergence",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 256,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-ASSESS-LAG",
+        "label": "Assess overall upstream lag",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 249,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-PRIORITIZE",
+        "label": "Prioritize update work",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-REPORT-STATUS",
+        "label": "Report status",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-HOLD-VERSIONS",
+        "label": "Hold packaged component versions",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 284,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-PUBLISH-RELEASES",
+        "label": "Publish releases",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "OA-ACTIVITY-PUBLISH-DISTRO-PACKAGES",
+        "label": "Publish distribution packages",
+        "layer": "Operational",
+        "stereotype": "<<component>>",
+        "interfaces_in": [],
+        "interfaces_out": [],
+        "functions": [],
+        "deployed": [],
+        "width": 263,
+        "height": 180
+      }
+    ],
+    "edges": [],
+    "layers": [
+      {
+        "name": "Operational",
+        "color": "#EFEBE9",
+        "description": "Architecture Layer"
+      }
+    ]
+  }
+}
