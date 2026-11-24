@@ -11,7 +11,7 @@
   "requirements": [],
   "components": [
     {
-      "id": "OA-MAINT",
+      "id": "OA-ACTOR-MAINTAINER",
       "name": "Package maintainer",
       "layer": "Operational",
       "component_type": "Actor",
@@ -23,7 +23,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-RELMGR",
+      "id": "OA-ACTOR-RELEASE-MANAGER",
       "name": "Release manager",
       "layer": "Operational",
       "component_type": "Actor",
@@ -35,7 +35,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-XSRC",
+      "id": "OA-ENTITY-XCPNG-SOURCES",
       "name": "XCP-ng 9 package sources",
       "layer": "Operational",
       "component_type": "System",
@@ -47,7 +47,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-UPSTREAM",
+      "id": "OA-ENTITY-UPSTREAM-PROJECTS",
       "name": "Upstream projects",
       "layer": "Operational",
       "component_type": "System",
@@ -59,7 +59,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-INTERM",
+      "id": "OA-ENTITY-INTERMEDIATE-DISTROS",
       "name": "Intermediate distributions",
       "layer": "Operational",
       "component_type": "System",
@@ -71,7 +71,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-IDUP",
+      "id": "OA-ACTIVITY-IDENTIFY-UPSTREAM",
       "name": "Identify the upstream of a component",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -83,7 +83,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-WATCH",
+      "id": "OA-ACTIVITY-WATCH-UPSTREAM",
       "name": "Watch upstream for new versions",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -95,7 +95,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-CMP",
+      "id": "OA-ACTIVITY-COMPARE-VERSIONS",
       "name": "Compare packaged version with upstream",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -107,7 +107,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-UPD",
+      "id": "OA-ACTIVITY-UPDATE-PACKAGE",
       "name": "Decide and perform package update",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -119,7 +119,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-DIVERGE",
+      "id": "OA-ACTIVITY-RECORD-DIVERGENCE",
       "name": "Record deliberate divergence",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -131,7 +131,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-ASSESS",
+      "id": "OA-ACTIVITY-ASSESS-LAG",
       "name": "Assess overall upstream lag",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -143,7 +143,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-PRIO",
+      "id": "OA-ACTIVITY-PRIORITIZE",
       "name": "Prioritize update work",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -155,7 +155,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-REPORT",
+      "id": "OA-ACTIVITY-REPORT-STATUS",
       "name": "Report status",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -167,7 +167,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-HOLD",
+      "id": "OA-ACTIVITY-HOLD-VERSIONS",
       "name": "Hold packaged component versions",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -179,7 +179,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-PUBREL",
+      "id": "OA-ACTIVITY-PUBLISH-RELEASES",
       "name": "Publish releases",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -191,7 +191,7 @@
       "description": "Component in Operational layer"
     },
     {
-      "id": "OA-ACT-PUBPKG",
+      "id": "OA-ACTIVITY-PUBLISH-DISTRO-PACKAGES",
       "name": "Publish distribution packages",
       "layer": "Operational",
       "component_type": "OperationalActivity",
@@ -209,7 +209,7 @@
   "missions": [],
   "capabilities": [
     {
-      "id": "OC-KNOW",
+      "id": "OA-CAP-KNOW-STANDING",
       "name": "Know where each component stands relative to upstream",
       "kind": "Operational",
       "mission": null,
@@ -227,7 +227,7 @@
       ]
     },
     {
-      "id": "OC-STEER",
+      "id": "OA-CAP-STEER-CATCHUP",
       "name": "Steer upstream catch-up work",
       "kind": "Operational",
       "mission": null,
@@ -254,7 +254,7 @@
   "diagram": {
     "nodes": [
       {
-        "id": "OA-MAINT",
+        "id": "OA-ACTOR-MAINTAINER",
         "label": "Package maintainer",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -266,7 +266,7 @@
         "height": 180
       },
       {
-        "id": "OA-RELMGR",
+        "id": "OA-ACTOR-RELEASE-MANAGER",
         "label": "Release manager",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -278,7 +278,7 @@
         "height": 180
       },
       {
-        "id": "OA-XSRC",
+        "id": "OA-ENTITY-XCPNG-SOURCES",
         "label": "XCP-ng 9 package sources",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -290,7 +290,7 @@
         "height": 180
       },
       {
-        "id": "OA-UPSTREAM",
+        "id": "OA-ENTITY-UPSTREAM-PROJECTS",
         "label": "Upstream projects",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -302,7 +302,7 @@
         "height": 180
       },
       {
-        "id": "OA-INTERM",
+        "id": "OA-ENTITY-INTERMEDIATE-DISTROS",
         "label": "Intermediate distributions",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -314,7 +314,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-IDUP",
+        "id": "OA-ACTIVITY-IDENTIFY-UPSTREAM",
         "label": "Identify the upstream of a component",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -326,7 +326,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-WATCH",
+        "id": "OA-ACTIVITY-WATCH-UPSTREAM",
         "label": "Watch upstream for new versions",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -338,7 +338,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-CMP",
+        "id": "OA-ACTIVITY-COMPARE-VERSIONS",
         "label": "Compare packaged version with upstream",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -350,7 +350,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-UPD",
+        "id": "OA-ACTIVITY-UPDATE-PACKAGE",
         "label": "Decide and perform package update",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -362,7 +362,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-DIVERGE",
+        "id": "OA-ACTIVITY-RECORD-DIVERGENCE",
         "label": "Record deliberate divergence",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -374,7 +374,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-ASSESS",
+        "id": "OA-ACTIVITY-ASSESS-LAG",
         "label": "Assess overall upstream lag",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -386,7 +386,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-PRIO",
+        "id": "OA-ACTIVITY-PRIORITIZE",
         "label": "Prioritize update work",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -398,7 +398,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-REPORT",
+        "id": "OA-ACTIVITY-REPORT-STATUS",
         "label": "Report status",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -410,7 +410,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-HOLD",
+        "id": "OA-ACTIVITY-HOLD-VERSIONS",
         "label": "Hold packaged component versions",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -422,7 +422,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-PUBREL",
+        "id": "OA-ACTIVITY-PUBLISH-RELEASES",
         "label": "Publish releases",
         "layer": "Operational",
         "stereotype": "<<component>>",
@@ -434,7 +434,7 @@
         "height": 180
       },
       {
-        "id": "OA-ACT-PUBPKG",
+        "id": "OA-ACTIVITY-PUBLISH-DISTRO-PACKAGES",
         "label": "Publish distribution packages",
         "layer": "Operational",
         "stereotype": "<<component>>",

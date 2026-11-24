@@ -50,98 +50,98 @@ package <xcpng9_status> 'XCP-ng 9 upstream status' {
         item def 'Updated package';
     }
     #OA package 'Following XCP-ng 9 components against upstream' {
-        action <'OA-ACT-IDUP'> 'Identify the upstream of a component' {
+        action <'OA-ACTIVITY-IDENTIFY-UPSTREAM'> 'Identify the upstream of a component' {
             doc /* Know where a package comes from: which upstream project, which branch or release line, possibly through an intermediate distribution (XenServer, AlmaLinux 10) */
         }
-        action <'OA-ACT-WATCH'> 'Watch upstream for new versions' {
+        action <'OA-ACTIVITY-WATCH-UPSTREAM'> 'Watch upstream for new versions' {
             doc /* Notice new releases, tags or packaged builds on the upstream release line followed */
         }
-        action <'OA-ACT-CMP'> 'Compare packaged version with upstream' {
+        action <'OA-ACTIVITY-COMPARE-VERSIONS'> 'Compare packaged version with upstream' {
             doc /* Determine whether the XCP-ng 9 package is up to date with the release line followed, or behind (and by how much) */
         }
-        action <'OA-ACT-UPD'> 'Decide and perform package update' {
+        action <'OA-ACTIVITY-UPDATE-PACKAGE'> 'Decide and perform package update' {
             doc /* Rebase, backport or deliberately hold back, then build and publish the package */
         }
-        action <'OA-ACT-DIVERGE'> 'Record deliberate divergence' {
+        action <'OA-ACTIVITY-RECORD-DIVERGENCE'> 'Record deliberate divergence' {
             doc /* When a component is deliberately kept on an older version or release line, record why, so that it is not mistaken for plain lag */
         }
-        action <'OA-ACT-ASSESS'> 'Assess overall upstream lag' {
+        action <'OA-ACTIVITY-ASSESS-LAG'> 'Assess overall upstream lag' {
             doc /* Get a consolidated view of which components lag behind upstream, and how much */
         }
-        action <'OA-ACT-PRIO'> 'Prioritize update work' {
+        action <'OA-ACTIVITY-PRIORITIZE'> 'Prioritize update work' {
             doc /* Decide which component updates matter for the next milestone and assign them */
         }
-        action <'OA-ACT-REPORT'> 'Report status' {
+        action <'OA-ACTIVITY-REPORT-STATUS'> 'Report status' {
             doc /* Communicate the state of XCP-ng 9 relative to upstream to the team and management */
         }
-        action <'OA-ACT-HOLD'> 'Hold packaged component versions' {
+        action <'OA-ACTIVITY-HOLD-VERSIONS'> 'Hold packaged component versions' {
             doc /* Each package declares a version (and release), the upstream it is based on, and downstream patches */
         }
-        action <'OA-ACT-PUBREL'> 'Publish releases' {
+        action <'OA-ACTIVITY-PUBLISH-RELEASES'> 'Publish releases' {
             doc /* Tags, release tarballs, branches */
         }
-        action <'OA-ACT-PUBPKG'> 'Publish distribution packages' {
+        action <'OA-ACTIVITY-PUBLISH-DISTRO-PACKAGES'> 'Publish distribution packages' {
             doc /* Source packages and errata for a release line */
         }
-        #Entity part <'OA-XSRC'> 'XCP-ng 9 package sources' {
+        #Entity part <'OA-ENTITY-XCPNG-SOURCES'> 'XCP-ng 9 package sources' {
             doc /* Packaging sources of XCP-ng 9 (spec files, patches, per-package git repositories) and the build system producing the distribution */
-            perform 'OA-ACT-HOLD';
+            perform 'OA-ACTIVITY-HOLD-VERSIONS';
         }
-        #Entity part <'OA-UPSTREAM'> 'Upstream projects' {
+        #Entity part <'OA-ENTITY-UPSTREAM-PROJECTS'> 'Upstream projects' {
             doc /* Original projects of the components: Xen, xapi and toolstack (xapi-project), Linux kernel, QEMU, OCaml libraries, storage stack, etc. */
-            perform 'OA-ACT-PUBREL';
+            perform 'OA-ACTIVITY-PUBLISH-RELEASES';
         }
-        #Entity part <'OA-INTERM'> 'Intermediate distributions' {
+        #Entity part <'OA-ENTITY-INTERMEDIATE-DISTROS'> 'Intermediate distributions' {
             doc /* Distributions XCP-ng 9 takes packages from or bases packages on, rather than original upstreams: AlmaLinux 10 (the Enterprise Linux base), XenServer (for some components) */
-            perform 'OA-ACT-PUBPKG';
+            perform 'OA-ACTIVITY-PUBLISH-DISTRO-PACKAGES';
         }
-        #Actor part <'OA-MAINT'> 'Package maintainer' {
+        #Actor part <'OA-ACTOR-MAINTAINER'> 'Package maintainer' {
             doc /* XCP-ng team member owning one or more packages of XCP-ng 9 */
-            perform 'OA-ACT-IDUP';
-            perform 'OA-ACT-WATCH';
-            perform 'OA-ACT-CMP';
-            perform 'OA-ACT-UPD';
-            perform 'OA-ACT-DIVERGE';
+            perform 'OA-ACTIVITY-IDENTIFY-UPSTREAM';
+            perform 'OA-ACTIVITY-WATCH-UPSTREAM';
+            perform 'OA-ACTIVITY-COMPARE-VERSIONS';
+            perform 'OA-ACTIVITY-UPDATE-PACKAGE';
+            perform 'OA-ACTIVITY-RECORD-DIVERGENCE';
         }
-        #Actor part <'OA-RELMGR'> 'Release manager' {
+        #Actor part <'OA-ACTOR-RELEASE-MANAGER'> 'Release manager' {
             doc /* Person steering XCP-ng 9 as a whole (release lead, project lead) */
-            perform 'OA-ACT-ASSESS';
-            perform 'OA-ACT-PRIO';
-            perform 'OA-ACT-REPORT';
+            perform 'OA-ACTIVITY-ASSESS-LAG';
+            perform 'OA-ACTIVITY-PRIORITIZE';
+            perform 'OA-ACTIVITY-REPORT-STATUS';
         }
-        #Capability use case <'OC-KNOW'> 'Know where each component stands relative to upstream' {
+        #Capability use case <'OA-CAP-KNOW-STANDING'> 'Know where each component stands relative to upstream' {
             doc /* For every XCP-ng 9 component: its upstream, the version packaged, the latest version on the release line followed, the gap, and whether that gap is plain lag or deliberate divergence */
         }
-        dependency involves from 'OC-KNOW' to 'OA-MAINT';
-        dependency involves from 'OC-KNOW' to 'OA-XSRC';
-        dependency involves from 'OC-KNOW' to 'OA-UPSTREAM';
-        dependency involves from 'OC-KNOW' to 'OA-INTERM';
-        dependency involves from 'OC-KNOW' to 'OA-ACT-IDUP';
-        dependency involves from 'OC-KNOW' to 'OA-ACT-WATCH';
-        dependency involves from 'OC-KNOW' to 'OA-ACT-CMP';
-        dependency involves from 'OC-KNOW' to 'OA-ACT-DIVERGE';
-        dependency involves from 'OC-KNOW' to 'OA-ACT-HOLD';
-        #Capability use case <'OC-STEER'> 'Steer upstream catch-up work' {
+        dependency involves from 'OA-CAP-KNOW-STANDING' to 'OA-ACTOR-MAINTAINER';
+        dependency involves from 'OA-CAP-KNOW-STANDING' to 'OA-ENTITY-XCPNG-SOURCES';
+        dependency involves from 'OA-CAP-KNOW-STANDING' to 'OA-ENTITY-UPSTREAM-PROJECTS';
+        dependency involves from 'OA-CAP-KNOW-STANDING' to 'OA-ENTITY-INTERMEDIATE-DISTROS';
+        dependency involves from 'OA-CAP-KNOW-STANDING' to 'OA-ACTIVITY-IDENTIFY-UPSTREAM';
+        dependency involves from 'OA-CAP-KNOW-STANDING' to 'OA-ACTIVITY-WATCH-UPSTREAM';
+        dependency involves from 'OA-CAP-KNOW-STANDING' to 'OA-ACTIVITY-COMPARE-VERSIONS';
+        dependency involves from 'OA-CAP-KNOW-STANDING' to 'OA-ACTIVITY-RECORD-DIVERGENCE';
+        dependency involves from 'OA-CAP-KNOW-STANDING' to 'OA-ACTIVITY-HOLD-VERSIONS';
+        #Capability use case <'OA-CAP-STEER-CATCHUP'> 'Steer upstream catch-up work' {
             doc /* Use the consolidated view to prioritize, track and report updates across the distribution */
         }
-        dependency includes from 'OC-STEER' to 'OC-KNOW';
-        dependency involves from 'OC-STEER' to 'OA-RELMGR';
-        dependency involves from 'OC-STEER' to 'OA-MAINT';
-        dependency involves from 'OC-STEER' to 'OA-ACT-ASSESS';
-        dependency involves from 'OC-STEER' to 'OA-ACT-PRIO';
-        dependency involves from 'OC-STEER' to 'OA-ACT-UPD';
-        dependency involves from 'OC-STEER' to 'OA-ACT-REPORT';
-        connection <'OE-UPREL'> 'Upstream release' connect 'OA-UPSTREAM' to 'OA-MAINT';
-        // OE-UPREL exchange_item Release (name, version, date): an end is not exported
-        connection <'OE-DISTPKG'> 'Distribution package update' connect 'OA-INTERM' to 'OA-MAINT';
-        // OE-DISTPKG exchange_item Source package (name, version-release): an end is not exported
-        connection <'OE-PKGVER'> 'Packaged version' connect 'OA-XSRC' to 'OA-MAINT';
-        // OE-PKGVER exchange_item Package (name, version-release, upstream reference): an end is not exported
-        connection <'OE-PKGUPD'> 'Package update' connect 'OA-MAINT' to 'OA-XSRC';
-        // OE-PKGUPD exchange_item Updated package: an end is not exported
-        connection <'OE-COMPSTAT'> 'Component status' connect 'OA-MAINT' to 'OA-RELMGR';
-        // OE-COMPSTAT exchange_item Component status (packaged vs upstream; lagging or deliberately diverging, with rationale): an end is not exported
-        connection <'OE-ASSIGN'> 'Update assignment' connect 'OA-RELMGR' to 'OA-MAINT';
-        // OE-ASSIGN exchange_item Prioritized update task: an end is not exported
+        dependency includes from 'OA-CAP-STEER-CATCHUP' to 'OA-CAP-KNOW-STANDING';
+        dependency involves from 'OA-CAP-STEER-CATCHUP' to 'OA-ACTOR-RELEASE-MANAGER';
+        dependency involves from 'OA-CAP-STEER-CATCHUP' to 'OA-ACTOR-MAINTAINER';
+        dependency involves from 'OA-CAP-STEER-CATCHUP' to 'OA-ACTIVITY-ASSESS-LAG';
+        dependency involves from 'OA-CAP-STEER-CATCHUP' to 'OA-ACTIVITY-PRIORITIZE';
+        dependency involves from 'OA-CAP-STEER-CATCHUP' to 'OA-ACTIVITY-UPDATE-PACKAGE';
+        dependency involves from 'OA-CAP-STEER-CATCHUP' to 'OA-ACTIVITY-REPORT-STATUS';
+        connection <'OA-COMM-UPSTREAM-RELEASE'> 'Upstream release' connect 'OA-ENTITY-UPSTREAM-PROJECTS' to 'OA-ACTOR-MAINTAINER';
+        // OA-COMM-UPSTREAM-RELEASE exchange_item Release (name, version, date): an end is not exported
+        connection <'OA-COMM-DISTRO-PACKAGE'> 'Distribution package update' connect 'OA-ENTITY-INTERMEDIATE-DISTROS' to 'OA-ACTOR-MAINTAINER';
+        // OA-COMM-DISTRO-PACKAGE exchange_item Source package (name, version-release): an end is not exported
+        connection <'OA-COMM-PACKAGED-VERSION'> 'Packaged version' connect 'OA-ENTITY-XCPNG-SOURCES' to 'OA-ACTOR-MAINTAINER';
+        // OA-COMM-PACKAGED-VERSION exchange_item Package (name, version-release, upstream reference): an end is not exported
+        connection <'OA-COMM-PACKAGE-UPDATE'> 'Package update' connect 'OA-ACTOR-MAINTAINER' to 'OA-ENTITY-XCPNG-SOURCES';
+        // OA-COMM-PACKAGE-UPDATE exchange_item Updated package: an end is not exported
+        connection <'OA-COMM-COMPONENT-STATUS'> 'Component status' connect 'OA-ACTOR-MAINTAINER' to 'OA-ACTOR-RELEASE-MANAGER';
+        // OA-COMM-COMPONENT-STATUS exchange_item Component status (packaged vs upstream; lagging or deliberately diverging, with rationale): an end is not exported
+        connection <'OA-COMM-UPDATE-ASSIGNMENT'> 'Update assignment' connect 'OA-ACTOR-RELEASE-MANAGER' to 'OA-ACTOR-MAINTAINER';
+        // OA-COMM-UPDATE-ASSIGNMENT exchange_item Prioritized update task: an end is not exported
     }
 }
