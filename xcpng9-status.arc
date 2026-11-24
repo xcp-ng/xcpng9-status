@@ -27,6 +27,9 @@
 //          CAP       operational capability
 //          COMM      interaction between entities or actors
 //                    (Capella: Communication Mean)
+//          INTER     interaction between activities (Capella: Operational
+//                    Interaction); one crossing entities is carried by
+//                    (allocated to) a COMM between their performers
 
 model xcpng9_status {
     name: "XCP-ng 9 upstream status"
@@ -161,4 +164,23 @@ operational_analysis "Following XCP-ng 9 components against upstream" {
         involves: ["OA-ACTOR-RELEASE-MANAGER", "OA-ACTOR-MAINTAINER", "OA-ACTIVITY-ASSESS-LAG", "OA-ACTIVITY-PRIORITIZE", "OA-ACTIVITY-UPDATE-PACKAGE", "OA-ACTIVITY-REPORT-STATUS"]
         includes: ["OA-CAP-KNOW-STANDING"]
     }
+
+    // ---------------------------------------------------------------------
+    // Interactions between activities
+    // ---------------------------------------------------------------------
+
+    interaction "Upstream reference" { id: "OA-INTER-UPSTREAM-REFERENCE" from: "OA-ACTIVITY-HOLD-VERSIONS" to: "OA-ACTIVITY-IDENTIFY-UPSTREAM" data_type: "Upstream reference (project, release line, intermediate distribution)" }
+    interaction "Release line followed" { id: "OA-INTER-RELEASE-LINE" from: "OA-ACTIVITY-IDENTIFY-UPSTREAM" to: "OA-ACTIVITY-WATCH-UPSTREAM" data_type: "Upstream and release line to watch" }
+    interaction "New upstream release" { id: "OA-INTER-NEW-UPSTREAM-RELEASE" from: "OA-ACTIVITY-PUBLISH-RELEASES" to: "OA-ACTIVITY-WATCH-UPSTREAM" data_type: "Release (name, version, date)" }
+    interaction "New distribution package" { id: "OA-INTER-NEW-DISTRO-PACKAGE" from: "OA-ACTIVITY-PUBLISH-DISTRO-PACKAGES" to: "OA-ACTIVITY-WATCH-UPSTREAM" data_type: "Source package (name, version-release)" }
+    interaction "Latest upstream version" { id: "OA-INTER-LATEST-VERSION" from: "OA-ACTIVITY-WATCH-UPSTREAM" to: "OA-ACTIVITY-COMPARE-VERSIONS" data_type: "Latest version on the release line followed" }
+    interaction "Current package version" { id: "OA-INTER-CURRENT-VERSION" from: "OA-ACTIVITY-HOLD-VERSIONS" to: "OA-ACTIVITY-COMPARE-VERSIONS" data_type: "Package (name, version-release)" }
+    interaction "Version gap" { id: "OA-INTER-VERSION-GAP" from: "OA-ACTIVITY-COMPARE-VERSIONS" to: "OA-ACTIVITY-UPDATE-PACKAGE" data_type: "Gap between packaged and latest upstream version" }
+    interaction "Hold-back decision" { id: "OA-INTER-HOLD-BACK" from: "OA-ACTIVITY-UPDATE-PACKAGE" to: "OA-ACTIVITY-RECORD-DIVERGENCE" data_type: "Decision to keep an older version or release line, with reason" }
+    interaction "Updated package" { id: "OA-INTER-UPDATED-PACKAGE" from: "OA-ACTIVITY-UPDATE-PACKAGE" to: "OA-ACTIVITY-HOLD-VERSIONS" data_type: "Updated package" }
+    interaction "Component lag" { id: "OA-INTER-COMPONENT-LAG" from: "OA-ACTIVITY-COMPARE-VERSIONS" to: "OA-ACTIVITY-ASSESS-LAG" data_type: "Component status (packaged vs upstream)" }
+    interaction "Divergence rationale" { id: "OA-INTER-DIVERGENCE-RATIONALE" from: "OA-ACTIVITY-RECORD-DIVERGENCE" to: "OA-ACTIVITY-ASSESS-LAG" data_type: "Deliberate divergence, with rationale" }
+    interaction "Consolidated lag" { id: "OA-INTER-CONSOLIDATED-LAG" from: "OA-ACTIVITY-ASSESS-LAG" to: "OA-ACTIVITY-PRIORITIZE" data_type: "Lag across all components" }
+    interaction "Status to report" { id: "OA-INTER-STATUS-TO-REPORT" from: "OA-ACTIVITY-ASSESS-LAG" to: "OA-ACTIVITY-REPORT-STATUS" data_type: "Lag across all components" }
+    interaction "Update task" { id: "OA-INTER-UPDATE-TASK" from: "OA-ACTIVITY-PRIORITIZE" to: "OA-ACTIVITY-UPDATE-PACKAGE" data_type: "Prioritized update task" }
 }
